@@ -8,8 +8,8 @@ import { Chip, Divider } from "@nextui-org/react";
 export const CardLembranca = ({ props }: TCardLembranca) => {
   function verificaString(valor: string): string {
     if (valor.length >= 160) {
-        const valorAtual = valor.slice(0, 160);
-        return `${valorAtual}...`; 
+      const valorAtual = valor.slice(0, 160);
+      return `${valorAtual}...`;
     }
     return `${valor}`;
   }
@@ -21,10 +21,21 @@ export const CardLembranca = ({ props }: TCardLembranca) => {
           className="max-w-80 border-2 rounded-lg bg-white py-4"
         >
           <div className="w-full flex items-center justify-between px-4">
-            <Chip className="bg-yellow-100 text-amber-500 border-1 border-yellow-200">
+            <Chip
+              className=" border-1"
+              style={{
+                borderColor: card.color, // Cor da borda dinâmica
+                backgroundColor: `${card.color}20`, // Cor de fundo com transparência (hex com opacidade)
+                color: card.color, // Cor do texto dinâmica
+              }}
+            >
               {card.category}
             </Chip>
-            <BtnMenuCard id={card.key} textoCard={card.content} titleCard={card.title} />
+            <BtnMenuCard
+              id={card.key}
+              textoCard={card.content}
+              titleCard={card.title}
+            />
           </div>
           <div className="px-4 mt-2">
             <h4>{card.title}</h4>

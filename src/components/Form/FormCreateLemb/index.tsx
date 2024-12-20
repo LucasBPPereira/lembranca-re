@@ -1,20 +1,23 @@
 "use client";
 
+import { ColorPicker } from "@/components/ColorPicker";
 import cn from "@/utils/cn";
 import { DateValue, fromDate, getLocalTimeZone } from "@internationalized/date";
 import { DatePicker } from "@nextui-org/date-picker";
 import { Button, Chip, Form, Input, Link, Textarea } from "@nextui-org/react";
 import { I18nProvider } from "@react-aria/i18n";
 import { useState } from "react";
+import { Color, parseColor } from "react-aria-components";
 
 export const FormCreateLemb = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [category, setCategory] = useState<string>("");
+  const [category, setCategory] = useState<string>("Aqui");
+  const [cor, setCor] = useState<Color>(parseColor("rgb(230, 241, 254)"));
   const [date, setDate] = useState<DateValue | null>(
     fromDate(new Date(), "America/Sao_Paulo")
   );
-
+  const corHex = cor.toString("hex");
   // Formatter ajustado para formato 24 horas
   // const formatter = useDateFormatter({
   //   dateStyle: "short",
@@ -33,10 +36,12 @@ export const FormCreateLemb = () => {
     const lembData = {
       title,
       content,
+      category,
+      color: corHex,
       date: date.toDate(getLocalTimeZone()).toISOString(),
     };
 
-    console.log("Dados enviados:", lembData);
+    console.log("Dados enviados:", lembData, corHex);
 
     try {
       const response = await fetch("/api/r/lemb", {
@@ -99,6 +104,56 @@ export const FormCreateLemb = () => {
           }}
         />
 
+        <div className="w-full flex flex-col gap-2 items-center">
+          <div className="flex flex-col sm:flex-row items-center w-full">
+            <Input
+              label="Categoria"
+              color="primary"
+              variant="bordered"
+              name="category"
+              placeholder="Insira uma tag para a lembrança"
+              description="Dessa forma você consegue definir o ponto destaque da lembrança"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              isRequired={true}
+              classNames={{
+                description: "text-default-500",
+              }}
+              className="max-w-[400px]"
+            />
+            <Chip
+              style={{
+                borderColor: corHex, // Cor da borda dinâmica
+                backgroundColor: `${corHex}20`, // Cor de fundo com transparência (hex com opacidade)
+                color: corHex, // Cor do texto dinâmica
+              }}
+              className={"mb-5 ml-3 border-1"}
+            >
+              {category}
+            </Chip>
+          </div>
+          <div className="flex flex-col justify-start w-full mb-4">
+            <ColorPicker
+              value={cor}
+              onChange={setCor}
+              label="Cor da tag"
+            />
+            <p className="text-sm text-default-500">A cor da tag vai ficar assim</p>
+          </div>
+
+          {/* <Input
+            type="color"
+            color="primary"
+            variant="bordered"
+            label="Cor"
+            value={cor}
+            onChange={(e) => {
+              setCor(e.target.value);
+              console.log(cor);
+            }}
+          /> */}
+        </div>
+
         <I18nProvider locale="pt-BR">
           <DatePicker
             hideTimeZone
@@ -121,30 +176,6 @@ export const FormCreateLemb = () => {
           />
         </I18nProvider>
 
-        <div className="flex gap-2 items-center">
-          <Input
-            label="Categoria"
-            color="primary"
-            variant="bordered"
-            name="category"
-            placeholder="Insira uma tag para a lembrança"
-            description="Dessa forma você consegue definir o ponto destaque da lembrança"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            isRequired={true}
-            classNames={{
-              description: "text-default-500"
-            }}
-          />
-          <Chip>{category}</Chip>
-          <Input 
-            type="color"
-            color="primary"
-            variant="bordered"
-            label="Cor"
-          />
-        </div>
-
         <Textarea
           label="Conteúdo"
           color="primary"
@@ -157,7 +188,7 @@ export const FormCreateLemb = () => {
           onChange={(e) => setContent(e.target.value)}
           validate={(value) => {
             if (value == "") {
-              return "O conteúdo não pode estar vazio!"
+              return "O conteúdo não pode estar vazio!";
             }
             if (value.length < 20) {
               return "O conteúdo da lembrança é pequeno!";
@@ -181,7 +212,7 @@ export const FormCreateLemb = () => {
             href="/lembrancas"
             onKeyDown={(e) => {
               if ("continuePropagation" in e) {
-                e.continuePropagation()
+                e.continuePropagation();
               }
             }}
           >

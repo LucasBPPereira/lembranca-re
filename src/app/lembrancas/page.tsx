@@ -1,5 +1,6 @@
 import { CardLembranca } from "@/components/Card/CardLembranca";
 import { MainComponent } from "@/components/ind/MainComponent";
+import { InputSearch } from "@/components/Input/InputSearch";
 
 const mock = [
     {
@@ -15,7 +16,7 @@ const mock = [
     title: "Testando",
     content: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, delectus deleniti id quos iure dignissimos voluptatum sit ullam error eligendi autem consectetur doloribus cumque unde voluptas minus perspiciatis explicabo provident.",
     category: "Praia",
-    color: "#fafafa",
+    color: "#da1818",
     date: "24/12/20024"
 },
     {
@@ -31,6 +32,7 @@ const mock = [
 export default function PageLembrancas() {
   return (
     <MainComponent className="bg-gradient-to-tr from-[#d0e9f8] to-sky-50">
+        <InputSearch />
         <div className="flex gap-5">
         <CardLembranca props={mock} />
         </div>
