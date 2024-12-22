@@ -27,3 +27,28 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* -- Date Picker NextUI component -- */
+
+[data-slot="cell"] span[role="button"] {
+  @apply text-default-500 data-[hover=true]:text-primary-400 data-[selected=true]:text-primary-foreground data-[disabled=true]:text-default-300;
+}
+
+div[data-slot="input-wrapper"] div[data-slot="input"] div[role="spinbutton"] {
+  @apply text-default-500
+}
+
+button[data-slot="picker-item"] {
+  @apply text-default-600
+}
+
+div[data-slot="calendar"] div[data-slot="header-wrapper"] button[data-slot="header"] span[data-slot="title"] {
+  @apply text-xs
+}
+div[data-slot="calendar"] div[data-slot="picker-wrapper"] div[data-slot="picker-highlight"] {
+  @apply bg-primary-100 
+}
+div[data-slot="calendar"] div[data-slot="picker-wrapper"] button[data-slot="picker-item"] {
+  @apply data-[hover=true]:text-primary-800 
+}

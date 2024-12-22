@@ -12,8 +12,8 @@ import { Color, parseColor } from "react-aria-components";
 export const FormCreateLemb = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-  const [category, setCategory] = useState<string>("Aqui");
-  const [cor, setCor] = useState<Color>(parseColor("rgb(230, 241, 254)"));
+  const [category, setCategory] = useState<string>("Tag");
+  const [cor, setCor] = useState<Color>(parseColor("rgb(91, 59, 235)"));
   const [date, setDate] = useState<DateValue | null>(
     fromDate(new Date(), "America/Sao_Paulo")
   );
@@ -113,7 +113,7 @@ export const FormCreateLemb = () => {
               name="category"
               placeholder="Insira uma tag para a lembrança"
               description="Dessa forma você consegue definir o ponto destaque da lembrança"
-              value={category}
+              value={category === "Tag" ? "" : category}
               onChange={(e) => setCategory(e.target.value)}
               isRequired={true}
               classNames={{
@@ -124,10 +124,10 @@ export const FormCreateLemb = () => {
             <Chip
               style={{
                 borderColor: corHex, // Cor da borda dinâmica
-                backgroundColor: `${corHex}20`, // Cor de fundo com transparência (hex com opacidade)
+                backgroundColor: `${corHex}10`, // Cor de fundo com transparência (hex com opacidade)
                 color: corHex, // Cor do texto dinâmica
               }}
-              className={"mb-5 ml-3 border-1"}
+              className={"mb-5 mt-2 sm:mt-0 sm:ml-3 border-1"}
             >
               {category}
             </Chip>
@@ -138,7 +138,7 @@ export const FormCreateLemb = () => {
               onChange={setCor}
               label="Cor da tag"
             />
-            <p className="text-sm text-default-500">A cor da tag vai ficar assim</p>
+            <p className="text-xs text-default-500">Personalize do seu jeito, você define o que representa.</p>
           </div>
 
           {/* <Input
@@ -160,11 +160,13 @@ export const FormCreateLemb = () => {
             showMonthAndYearPickers
             selectorButtonPlacement="start"
             className={cn(
-              "max-w-md [&_div[data-slot='segment'][data-editable='true']]:text-default-600 focus:[&_div[data-slot='segment'][data-editable='true']]:text-blue-700 [&_div[data-slot='description']]:text-default-500"
+              "max-w-md [&_div[data-slot='segment'][data-editable='true']]:text-default-600 focus:[&_div[data-slot='segment'][data-editable='true']]:text-blue-700 [&_div[data-slot='description']]:text-default-500 "
             )}
             classNames={{
               description: "data-[slot=description]:text-default-500",
+              timeInputLabel: "text-default-700",
             }}
+
             label="Data do lembrete"
             description="Selecione a data da qual você deseja lembrar futuramente"
             color="primary"
@@ -210,11 +212,7 @@ export const FormCreateLemb = () => {
             className="w-1/4"
             variant="bordered"
             href="/lembrancas"
-            onKeyDown={(e) => {
-              if ("continuePropagation" in e) {
-                e.continuePropagation();
-              }
-            }}
+            
           >
             Voltar
           </Button>

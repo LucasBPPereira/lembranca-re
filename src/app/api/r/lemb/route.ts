@@ -1,55 +1,42 @@
 import { NextResponse } from "next/server";
 
 export interface IRegisterLemb {
+  key: number;
   title: string;
   content: string;
   date: Date;
 }
 // const perm = process.env.POST_PERM_REG;
 
-const dados = [
+const mock = [
   {
-    title: "Teste de título",
+    key: 3,
+    title: "Testando o tres",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, delectus deleniti id quos iure dignissimos voluptatum sit ullam error eligendi autem consectetur doloribus cumque unde voluptas minus perspiciatis explicabo provident.",
+    category: "Praia",
+    color: "#da1818",
+    date: "24/12/20024",
   },
   {
-    title: "Teste de título",
+    key: 4,
+    title: "Fechou",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, delectus deleniti id quos iure dignissimos voluptatum sit ullam error eligendi autem consectetur doloribus cumque unde voluptas minus perspiciatis explicabo provident.",
+    category: "Casa",
+    color: "#da1818",
+    date: "24/12/20024",
   },
   {
-    title: "Teste de título",
+    key: 5,
+    title: "Testandoss",
     content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, delectus deleniti id quos iure dignissimos voluptatum sit ullam error eligendi autem consectetur doloribus cumque unde voluptas minus perspiciatis explicabo provident.",
+    category: "Restaurante",
+    color: "#da1818",
+    date: "24/12/20024",
   },
-  {
-    title: "Teste de título",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
-  },
-  {
-    title: "Teste de título",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
-  },
-  {
-    title: "Teste de título",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
-  },
-  {
-    title: "Teste de título",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit assumenda rem voluptates vero maiores hic, laudantium, quia quisquam, ullam ratione odio aut. Placeat blanditiis quibusdam dolorem nostrum, nisi eveniet totam!",
-    date: "2024-12-16",
-  },
+  
 ];
 
 function validDate(value: string | Date): boolean {
@@ -64,8 +51,8 @@ function validDate(value: string | Date): boolean {
 }
 
 export async function GET() {
-  try {
-    return NextResponse.json({dados}, { status: 200 });
+  try {    
+    return NextResponse.json({mock}, { status: 200 });
   } catch (error) {
     console.error("Erro na busca das lembranças: ", error);
 

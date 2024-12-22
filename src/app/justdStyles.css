@@ -72,10 +72,6 @@
         scrollbar-width: thin;
     }
 
-    body {
-        @apply bg-bg text-fg;
-    }
-
     /* dark mode */
     .dark {
         scrollbar-width: thin;

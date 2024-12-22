@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PageCriarLembranca() {
     return (
-    <MainComponent className="bg-blue-50 justify-center items-center">
+    <MainComponent className="h-screen bg-blue-50 justify-center items-center py-5">
         <FormCreateLemb />
     </MainComponent>
     )

@@ -76,6 +76,12 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
     }
   };
 
+  const onResetModal = () => {
+    setTitle(titleCard)
+    setContent(textoCard)
+    setEdit(true)
+  }
+
   return (
     <>
       <Dropdown>
@@ -162,16 +168,19 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
                   startContent={<CloseIcon />}
                   color="danger"
                   variant="light"
-                  onPress={onClose}
+                  onPress={() => {
+                    onResetModal()
+                    onClose()
+                  }}
                 >
                   Fechar
                 </Button>
                 <Button
                   startContent={<EditIcon />}
                   color="primary"
-                  onPress={() => setEdit(false)}
+                  onPress={() => edit ? setEdit(false) : onResetModal()}
                 >
-                  Editar
+                  {edit ? "Editar" : "Ler"}
                 </Button>
               </ModalFooter>
             </>
