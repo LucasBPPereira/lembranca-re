@@ -33,7 +33,7 @@ import { LembrancaContainer } from "@/components/LembrancasContainer";
 export default async function PageLembrancas() {
   let response;
  try {
-  const res = await fetch("http://127.0.0.1:3000/api/r/lemb", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/r/lemb`, {
     cache: "no-cache"
   });
   if (!res.ok) throw new Error(`Erro na API: ${res.statusText}`);

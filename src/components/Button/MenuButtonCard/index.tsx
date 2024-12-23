@@ -44,7 +44,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
     };
 
     try {
-      const response = await fetch(`api/r/lemb/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/r/lemb/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -64,7 +64,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
 
   const submitDeleteCard = async () => {
     try {
-      const response = await fetch(`api/r/lemb/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/r/lemb/${id}`, {
         method: "DELETE",
       });
 
