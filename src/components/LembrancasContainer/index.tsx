@@ -19,17 +19,18 @@ export const LembrancaContainer = ({ props }: TCardLembranca) => {
   const [searchCategory, setSearchCategory] = useState<Selection>(new Set([]));
 
   const filteredData = props.filter((item) => {
-    if (Array.from(searchCategory)[0] === "title") {
+    const categoryKey = Array.from(searchCategory)[0];
+
+    if (categoryKey === "title") {
       return item.title.toLowerCase().includes(searchValue.toLowerCase());
     }
-    if (Array.from(searchCategory)[0] === "tag") {
 
+    if (categoryKey === "tag") {
       return item.category.toLowerCase().includes(searchValue.toLowerCase());
     }
 
-    if (Array.from(searchCategory)[0] === undefined) {
-        return props
-    }
+    // Caso nenhuma categoria esteja selecionada, retorna todos os itens
+    return true;
   });
 
   return (
@@ -56,11 +57,11 @@ export const LembrancaContainer = ({ props }: TCardLembranca) => {
           ))}
         </Select>
       </div>
-      <MainComponent className="mt-20 h-full ">
+      <MainComponent className="mt-20 h-full sm:h-screen ">
         <div className="flex flex-col flex-wrap justify-center sm:flex-row sm:justify-start gap-5 transition-all duration-500">
           {filteredData.length > 0 ? (
             filteredData.map((item) => (
-              <CardLembranca key={item.key} props={[item]} />
+              <CardLembranca key={item.id} props={[item]} />
             ))
           ) : (
             <p className="text-gray-500">Nenhum resultado encontrado.</p>

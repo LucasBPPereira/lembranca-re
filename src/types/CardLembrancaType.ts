@@ -1,10 +1,10 @@
 type TCardLembrancaProps = {
-    key: number;
+    id: string;
     title: string;
     content: string;
     category: string;
     color?: string;
-    date?: string;
+    date: string;
 }
 
 export type TCardLembranca = {

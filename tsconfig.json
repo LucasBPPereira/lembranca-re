@@ -28,7 +28,9 @@
       "ui": [
         "./src/components/ui/index.ts"
       ]
-    }
+    },
+    "removeComments": true,
+    
   },
   "include": [
     "next-env.d.ts",

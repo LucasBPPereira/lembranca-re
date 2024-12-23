@@ -31,15 +31,23 @@ import { LembrancaContainer } from "@/components/LembrancasContainer";
 // ];
 
 export default async function PageLembrancas() {
-  const dados = await fetch("http://localhost:3000/api/r/lemb", {
-    cache: "no-cache",
+  let response;
+ try {
+  const res = await fetch("http://127.0.0.1:3000/api/r/lemb", {
+    cache: "no-cache"
   });
-  const response = await dados.json();
-  const mock = response.mock;
+  if (!res.ok) throw new Error(`Erro na API: ${res.statusText}`);
+  const data = await res.json();
+  
+  response = data.dados;
+} catch (error) {
+  console.error("Erro ao buscar dados:", error);
+  response = []; // Use um valor padrão em caso de erro
+}
 
   return (
-    <div className="bg-gradient-to-tr from-[#d0e9f8] to-sky-50 w-full h-screen flex flex-col">
-      <LembrancaContainer props={mock} />
+    <div className="bg-gradient-to-tr from-[#d0e9f8] to-sky-50 w-full flex flex-col">
+      <LembrancaContainer props={response} />
     </div>
   );
 }

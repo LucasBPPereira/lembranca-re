@@ -26,7 +26,7 @@ import { FormEvent, useState } from "react";
 type TBtnMenuCard = {
   textoCard: string;
   titleCard: string;
-  id: number;
+  id: string;
 };
 
 export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
@@ -123,8 +123,8 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
       </Dropdown>
       <Modal
         backdrop="blur"
-        placement="center"
         isOpen={isOpen}
+        scrollBehavior="outside"
         onOpenChange={onOpenChange}
       >
         <ModalContent>

@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@internationalized/date": "^3.6.0",
@@ -20,6 +21,7 @@
     "@react-aria/i18n": "^3.12.2",
     "bcrypt": "^5.1.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "framer-motion": "^11.15.0",
     "justd-icons": "^1.10.4",
     "next": "14.2.20",
@@ -44,5 +46,8 @@
     "tailwindcss-animate": "^1.0.7",
     "tailwindcss-react-aria-components": "^1.2.0",
     "typescript": "^5"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8"
   }
 }
