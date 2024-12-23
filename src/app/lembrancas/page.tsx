@@ -4,7 +4,7 @@ export default async function PageLembrancas() {
   let response;
  try {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/r/lemb`, {
-    next: {revalidate: 300},
+    next: {revalidate: 5},
   });
   if (!res.ok) throw new Error(`Erro na API: ${res.statusText}`);
   const data = await res.json();
@@ -12,7 +12,7 @@ export default async function PageLembrancas() {
   response = data.dados;
 } catch (error) {
   console.error("Erro ao buscar dados:", error);
-  response = []; // Use um valor padrão em caso de erro
+  response = []; 
 }
 
   return (

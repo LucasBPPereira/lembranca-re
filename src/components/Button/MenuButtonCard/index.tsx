@@ -44,7 +44,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
     };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/r/lemb/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/r/lemb/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -64,7 +64,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
 
   const submitDeleteCard = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/r/lemb/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/r/lemb/${id}`, {
         method: "DELETE",
       });
 
@@ -136,7 +136,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
                     {titleCard}
                   </ModalHeader>
                   <ModalBody>
-                    <p>{textoCard}</p>
+                    <p className="break-words hyphens-auto">{textoCard}</p>
                   </ModalBody>
                 </div>
               ) : (
@@ -160,7 +160,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                   />
-                  <Button type="submit">Salvar</Button>
+                  <Button color="success" type="submit">Salvar</Button>
                 </Form>
               )}
               <ModalFooter>
