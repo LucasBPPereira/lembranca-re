@@ -54,7 +54,7 @@ export const FormCreateLemb = () => {
     };
 
     try {
-      const response = await fetch("api/r/lemb", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/r/lemb`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
