@@ -7,8 +7,7 @@ neonConfig.webSocketConstructor = ws;
 
 export function PrismaGetInstance() {
   const pool = new Pool({
-    connectionString: process.env.POSTGRES_PRISMA_URL,
-    idleTimeoutMillis: 30000,
+    connectionString: process.env.POSTGRES_PRISMA_URL
   });
   const adapter = new PrismaNeon(pool);
   const prisma = new PrismaClient({ adapter });
