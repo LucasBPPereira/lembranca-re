@@ -5,6 +5,7 @@ import { CloseIcon } from "@/assets/icons/CloseIcon";
 import { DeleteDocumentIcon } from "@/assets/icons/DeleteIcon";
 import { EditIcon } from "@/assets/icons/EditIcon";
 import { HeartIcon } from "@/assets/icons/HeartIcon";
+import IMGCinnamorollConfuso from "@/assets/images/cinnamoroll-confuso.png";
 import {
   Button,
   Dropdown,
@@ -21,6 +22,7 @@ import {
   Textarea,
   useDisclosure,
 } from "@nextui-org/react";
+import Image from "next/image";
 import { FormEvent, useState } from "react";
 
 type TBtnMenuCard = {
@@ -31,6 +33,7 @@ type TBtnMenuCard = {
 
 export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [edit, setEdit] = useState(true);
   const [title, setTitle] = useState(titleCard);
   const [content, setContent] = useState(textoCard);
@@ -64,7 +67,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
 
   const submitDeleteCard = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/r/lemb/${id}`, {
+      const response = await fetch(`/api/r/lemb/${id}`, {
         method: "DELETE",
       });
 
@@ -115,7 +118,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
             color="danger"
             variant="flat"
             startContent={<DeleteDocumentIcon className="text-danger" />}
-            onPress={submitDeleteCard}
+            onPress={() => setIsModalOpen(true)}
           >
             Deletar lembrança
           </DropdownItem>
@@ -160,7 +163,7 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                   />
-                  <Button color="success" type="submit">Salvar</Button>
+                  <Button color="success" type="submit" variant="flat" className="w-full">Salvar</Button>
                 </Form>
               )}
               <ModalFooter>
@@ -187,6 +190,37 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
           )}
         </ModalContent>
       </Modal>
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative w-80 py-4 px-6 border-2 bg-white rounded-2xl shadow-lg transform -translate-y-1/4 ">
+            <h1 className="text-center text-danger-700 font-bold">
+              Realmente quer deletar a lembrança?
+            </h1>
+            <p className="text-center text-sm text-default-500">Tudo será perdido</p>
+            <Image
+              src={IMGCinnamorollConfuso}
+              alt="Cinnamoroll em dúvida"
+              width={160}
+              height={160}
+              className="mx-auto py-6 w-auto h-auto"
+            />
+            <div className="flex gap-2 px-2">
+              <Button
+                color="danger"
+                variant="bordered"
+                onPress={() => {
+                  submitDeleteCard()
+                  setIsModalOpen(false);
+                }} // Fecha o modal
+                className="w-full"
+              >
+                Deletar
+              </Button>
+              <Button variant="flat" color="secondary" className=" border-2 border-transparent hover:border-secondary-600/70 transition-colors duration-300" onPress={() => setIsModalOpen(false)}>Cancelar</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

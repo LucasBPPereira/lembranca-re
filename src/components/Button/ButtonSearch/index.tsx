@@ -2,17 +2,20 @@
 
 import { IconSVGProp } from "@/types/IconSVGType";
 import cn from "@/utils/cn";
-import { Button, Link } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
 
 export const ButtonSearch = () => {
+  const router = useRouter();
   return (
     <>
       <Button
         size="sm"
-        as={Link}
         color="primary"
         variant="flat"
-        href="/lembrancas/criar"
+        onPress={() => {
+          router.push("/lembrancas/criar");
+        }}
         className={cn(
           "group relative border-2 border-transparent hover:border-primary-500 min-w-8 p-0 rounded-full sm:px-3 sm:w-44 sm:rounded-lg transition-all duration-300"
         )}

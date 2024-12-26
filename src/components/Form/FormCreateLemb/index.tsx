@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarIcon } from "@/assets/icons/CalendarIcon";
+import IMGCinnamorollOK from "@/assets/images/cinnamoroll-ok.png";
 import { ColorPicker } from "@/components/ColorPicker";
 import cn from "@/utils/cn";
 import { verificaString } from "@/utils/verifyString";
@@ -12,15 +13,18 @@ import {
   Divider,
   Form,
   Input,
-  Link,
-  Textarea,
+  Spinner,
+  Textarea
 } from "@nextui-org/react";
 import { I18nProvider } from "@react-aria/i18n";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Color, parseColor } from "react-aria-components";
 
 export const FormCreateLemb = () => {
+  const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [category, setCategory] = useState<string>("Tag");
@@ -29,7 +33,7 @@ export const FormCreateLemb = () => {
     fromDate(new Date(), "America/Sao_Paulo")
   );
   const corHex = cor.toString("hex");
-  const router = useRouter()
+  const router = useRouter();
   // Formatter ajustado para formato 24 horas
   // const formatter = useDateFormatter({
   //   dateStyle: "short",
@@ -54,6 +58,7 @@ export const FormCreateLemb = () => {
     };
 
     try {
+      setLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/r/lemb`, {
         method: "POST",
         headers: {
@@ -63,12 +68,15 @@ export const FormCreateLemb = () => {
       });
 
       if (response.ok) {
-        router.push("/lembrancas")
+        setLoading(false);
+        setIsModalOpen(true);
       } else {
         alert("Erro ao criar lembrete.");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
+      setLoading(false);
     }
   };
 
@@ -206,15 +214,19 @@ export const FormCreateLemb = () => {
             }}
           />
           <div className="w-full flex gap-5 items-center mt-4">
-            <Button className="w-9/12" color="primary" type="submit">
+            <Button
+              className="w-9/12"
+              color="primary"
+              type="submit"
+              endContent={loading && <Spinner size="sm" color="default" />}
+            >
               Criar
             </Button>
             <Button
-              as={Link}
               color="secondary"
               className="w-1/4"
               variant="bordered"
-              href="/lembrancas"
+              onPress={() => router.push("/lembrancas")}
             >
               Voltar
             </Button>
@@ -247,13 +259,42 @@ export const FormCreateLemb = () => {
               <div className="flex gap-2 items-center justify-center">
                 <CalendarIcon className="inline text-default-500" />
                 <span className="text-sm text-default-600">
-                  { date?.toDate(getLocalTimeZone()).toLocaleDateString()}
+                  {date?.toDate(getLocalTimeZone()).toLocaleDateString()}
                 </span>
               </div>
             </Chip>
           </div>
         </div>
       </div>
+      {/* aqui */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="relative w-80 py-4 px-6 border-2 bg-white rounded-2xl shadow-lg transform -translate-y-1/4 ">
+            <h1 className="text-center text-green-700 font-bold mb-4">
+              Lembrança criada com sucesso!
+            </h1>
+            <Image
+              src={IMGCinnamorollOK}
+              alt="Cinnamoroll em cima de uma placa escrito ok"
+              width={160}
+              height={160}
+              className="mx-auto"
+            />
+            <Button
+              color="success"
+              variant="flat"
+              onPress={() => {
+                setIsModalOpen(false);
+
+                router.push("/lembrancas");
+              }} // Fecha o modal
+              className="w-full border-2 border-transparent hover:border-success-600/70 transition-colors duration-300"
+            >
+              Fechar
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

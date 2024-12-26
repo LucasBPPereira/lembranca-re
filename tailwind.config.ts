@@ -59,6 +59,9 @@ const config = withTV({
         md: "calc(var(--radius) - 2.5px)",
         sm: "calc(var(--radius) - 5px)",
       },
+      screens: {
+        "min-mobile": '370px',
+      },
     },
   },
   plugins: [

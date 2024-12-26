@@ -57,7 +57,7 @@ export const LembrancaContainer = ({ props }: TCardLembranca) => {
           ))}
         </Select>
       </div>
-      <MainComponent className="mt-20 h-full sm:h-screen ">
+      <MainComponent className="mt-20 h-screen ">
         <div className="flex flex-col flex-wrap justify-center sm:flex-row sm:justify-start gap-5 transition-all duration-500">
           {filteredData.length > 0 ? (
             filteredData.map((item) => (
