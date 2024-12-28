@@ -37,7 +37,7 @@ export const CardLembranca = ({ props }: TCardLembranca) => {
             />
           </div>
           <div className="px-4 mt-2 h-[154px] sm:h-44 relative">
-            <h4>{card.title}</h4>
+            <h4 className="text-default-800">{card.title}</h4>
             <p className="text-sm text-default-500 hyphens-auto break-words ">
               {verificaString(card.content)}
             </p>

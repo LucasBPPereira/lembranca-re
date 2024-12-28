@@ -135,11 +135,11 @@ export const BtnMenuCard = ({ id, textoCard, titleCard }: TBtnMenuCard) => {
             <>
               {edit ? (
                 <div>
-                  <ModalHeader className="flex flex-col gap-1">
+                  <ModalHeader className="flex flex-col gap-1 text-default-800">
                     {titleCard}
                   </ModalHeader>
                   <ModalBody>
-                    <p className="break-words hyphens-auto">{textoCard}</p>
+                    <p className="break-words hyphens-auto text-default-600">{textoCard}</p>
                   </ModalBody>
                 </div>
               ) : (

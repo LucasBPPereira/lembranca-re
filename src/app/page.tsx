@@ -8,12 +8,14 @@ import Link from "next/link";
 
 export default function Home() {
   const horaAtual = new Date().getHours();
+  console.log(horaAtual);
+  
   let cumprimento = "";
-  if (horaAtual >= 18) {
+  if (horaAtual >= 18 ) {
     cumprimento = "boa noite.";
-  } else if (horaAtual > 6 && horaAtual < 12) {
+  } else if (horaAtual >= 6 && horaAtual < 12) {
     cumprimento = "bom dia!";
-  } else {
+  } else if (horaAtual >= 12 && horaAtual < 18) {
     cumprimento = "boa tarde!";
   }
 
